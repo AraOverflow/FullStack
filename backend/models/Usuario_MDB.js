@@ -31,7 +31,7 @@ export class UsuarioModel{
         const usuarioExiste = await Usuario.findOne({$or: [{nick: nuevoUsuario.nick},{mail: nuevoUsuario.mail}]});
 
         if (usuarioExiste){
-            eturn {status:400, message: "Usuario Ya registrado"};
+            return {status:400, message: "Usuario Ya registrado"};
         }
 
         try{
