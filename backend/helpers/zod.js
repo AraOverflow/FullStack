@@ -1,7 +1,7 @@
 import zod from 'zod';
 
 const articuloSchema = zod.object({
-    id: zod.number(),
+    //id: zod.number(),
     titulo: zod.string(),
     cuerpo: zod.string(),
     usuario: zod.string()
