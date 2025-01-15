@@ -31,7 +31,7 @@ export class UsuarioModel{
         const usuarioExiste = await Usuario.findOne({$or: [{nick: nuevoUsuario.nick},{mail: nuevoUsuario.mail}]});
 
         if (usuarioExiste){
-            return "Usuario Duplicado"
+            eturn {status:400, message: "Usuario Ya registrado"};
         }
 
         try{
@@ -55,13 +55,13 @@ export class UsuarioModel{
             usuarioEncontrado = await Usuario.findOne({nick: usuarioEncontrado.nick});
 
             if (!usuarioEncontrado){
-                return "El usuario No Existe"
+                return {status:400, message: "Usuario No encontrado"};
             }
 
             const pwd = await bcrypt.compare(usuario.password, usuarioEncontrado.password);
 
             if (!pwd){
-                return "Fallo de autentificación"
+                return {status:400, message: "Error de Autentificación"};
             }
 
             const token = crearToken(usuarioEncontrado);
